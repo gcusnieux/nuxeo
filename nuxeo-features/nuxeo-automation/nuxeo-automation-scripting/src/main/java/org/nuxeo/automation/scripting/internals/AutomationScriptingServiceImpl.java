@@ -98,9 +98,10 @@ public class AutomationScriptingServiceImpl implements AutomationScriptingServic
         try {
             if (Boolean.valueOf(Framework.getProperty(AutomationScriptingConstants.AUTOMATION_SCRIPTING_PRECOMPILE,
                     AutomationScriptingConstants.DEFAULT_PRECOMPILE_STATUS))) {
-                return new NashornScriptEngineFactory().getScriptEngine(AutomationScriptingConstants.NASHORN_OPTIONS);
+                return new NashornScriptEngineFactory().getScriptEngine(AutomationScriptingConstants.NASHORN_OPTIONS,
+                        null, new AutomationScriptingClassFilter());
             } else {
-                return new NashornScriptEngineFactory().getScriptEngine();
+                return new NashornScriptEngineFactory().getScriptEngine(new AutomationScriptingClassFilter());
             }
         } catch (IllegalArgumentException e) {
             throw new AutomationScriptingException(
