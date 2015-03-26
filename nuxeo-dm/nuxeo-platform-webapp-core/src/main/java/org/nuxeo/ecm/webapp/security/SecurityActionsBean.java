@@ -280,9 +280,12 @@ public class SecurityActionsBean extends InputController implements SecurityActi
 
     @Override
     public String addPermission() throws ClientException {
-        String permissionName = permissionListManager.getSelectedPermission();
+        String[] selectedPermissions = permissionListManager.getSelectedPermissions();
         boolean grant = permissionActionListManager.getSelectedGrant().equals("Grant");
-        return addPermission(selectedEntry, permissionName, grant);
+        for (String permissionName: selectedPermissions) {
+            addPermission(selectedEntry, permissionName, grant);
+        }
+        return null;
     }
 
     @Override
@@ -293,11 +296,13 @@ public class SecurityActionsBean extends InputController implements SecurityActi
             FacesMessages.instance().add(message);
             return null;
         }
-        String permissionName = permissionListManager.getSelectedPermission();
+        String[] selectedPermissions = permissionListManager.getSelectedPermissions();
         boolean grant = permissionActionListManager.getSelectedGrant().equals("Grant");
 
         for (String principalName : selectedEntries) {
-            addPermission(principalName, permissionName, grant);
+            for (String permissionName: selectedPermissions) {
+                addPermission(principalName, permissionName, grant);
+            }
         }
         return null;
     }
@@ -328,8 +333,11 @@ public class SecurityActionsBean extends InputController implements SecurityActi
 
     @Override
     public String removePermission() {
-        securityData.removeModifiablePrivilege(selectedEntry, permissionListManager.getSelectedPermission(),
+        String[] selectedPermissions = permissionListManager.getSelectedPermissions();
+        for (String permissionName: selectedPermissions) {
+            securityData.removeModifiablePrivilege(selectedEntry, permissionName,
                 permissionActionListManager.getSelectedGrant().equals("Grant"));
+        }
 
         try {
             reconstructTableModel();

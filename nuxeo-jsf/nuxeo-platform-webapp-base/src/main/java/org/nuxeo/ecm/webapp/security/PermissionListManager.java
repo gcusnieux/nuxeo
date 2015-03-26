@@ -53,7 +53,7 @@ public class PermissionListManager implements Serializable {
 
     protected SelectItem[] availablePermissions;
 
-    protected String selectedPermission;
+    protected String[] selectedPermissions;
 
     public SelectItem[] getAvailablePermissions() throws ClientException {
         if (null == availablePermissions) {
@@ -74,12 +74,12 @@ public class PermissionListManager implements Serializable {
         return availablePermissions;
     }
 
-    public String getSelectedPermission() {
-        return selectedPermission;
+    public String[] getSelectedPermissions() {
+        return selectedPermissions;
     }
 
-    public void setSelectedPermission(String selectedPermission) {
-        this.selectedPermission = selectedPermission;
+    public void setSelectedPermissions(String[] selectedPermission) {
+        this.selectedPermissions = selectedPermission;
     }
 
 }

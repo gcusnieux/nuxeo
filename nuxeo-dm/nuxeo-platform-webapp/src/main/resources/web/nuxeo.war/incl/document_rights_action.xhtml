@@ -26,10 +26,10 @@
       <h:outputText value="#{messages['label.security.permission']}" />
     </td>
     <td class="fieldColumn">
-      <h:selectOneMenu value="#{permissionListManager.selectedPermission}"
-       id="rights_permission_select">
+      <h:selectManyListbox value="#{permissionListManager.selectedPermissions}"
+       id="rights_permission_select" render="4">
       <f:selectItems value="#{securityActions.settablePermissions}" />
-      </h:selectOneMenu>
+      </h:selectManyListbox>
     </td>
   </tr>
   <tr>
